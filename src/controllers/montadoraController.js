@@ -1,37 +1,37 @@
-import * as Categoria from '../models/CategoriaModel.js';
+import * as Montadora from '../models/MontadoraModel.js';
 
 export const cadastrar = async (req, res) => {
     try {
-        const categoria = req.body;
+        const montadora = req.body;
 
         // Verificar se o corpo da requisição contém os dados necessários
-        if (!categoria || Object.keys(categoria).length === 0) {
+        if (!montadora || Object.keys(montadora).length === 0) {
             return res.status(400).json({
                 success: false,
                 status: 400,
-                message: 'Dados do categoria não fornecidos'
+                message: 'Dados da montadora não fornecidos'
             });
         }
         // Validar os dados do veículo
-        if (!categoria.tipo || !categoria.icone || !categoria.data_cadastro || !categoria.data_alteracao) {
+        if (!montadora.nome || !montadora.logotipo || !montadora.data_cadastro || !montadora.data_alteracao) {
             return res.status(400).json({
                 success: false,
                 status: 400,
-                message: 'Dados do categoria incompletos ou inválidos'
+                message: 'Dados do montadora incompletos ou inválidos'
             });
         }
-        const novCategoria = await Categoria.cadastrar(categoria);   
+        const novMontadora = await Montadora.cadastrar(montadora);   
         res.status(201).json({
             success: true,
             status: 201,
-            message: 'Veículo categoria com sucesso',
-            veiculoId: novCategoria
+            message: 'Veículo montadora com sucesso',
+            veiculoId: novMontadora
         });
     } catch (error) {
         res.status(500).json({
             success: false,
             status: 500,
-            message: 'Erro ao cadastrar categoria',
+            message: 'Erro ao cadastrar montadora',
             error: error.message
         });
     }
